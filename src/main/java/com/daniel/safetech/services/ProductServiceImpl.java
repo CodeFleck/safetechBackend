@@ -5,11 +5,9 @@ import com.daniel.safetech.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
-/**
- * Product service implement.
- */
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -21,8 +19,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Iterable<Product> listAllProducts() {
-        return productRepository.findAll();
+    public List<Product> listAllProducts() {
+        return (List<Product>) productRepository.findAll();
     }
 
     @Override

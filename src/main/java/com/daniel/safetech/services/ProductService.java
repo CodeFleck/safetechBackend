@@ -2,11 +2,12 @@ package com.daniel.safetech.services;
 
 import com.daniel.safetech.enitities.Product;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
 
-    Iterable<Product> listAllProducts();
+    List<Product> listAllProducts();
 
     Optional<Product> getProductById(Integer id);
 

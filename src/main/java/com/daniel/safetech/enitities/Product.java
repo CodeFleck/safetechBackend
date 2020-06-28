@@ -1,24 +1,31 @@
 package com.daniel.safetech.enitities;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.Arrays;
 
-/**
- * Product entity.
- */
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
-    @Version
-    private Integer version;
-
-    private String productId;
     private String name;
-    private BigDecimal price;
+
+    private String description;
+
+    private String price;
+
+    @Column(name = "picByte", length = 1000)
+    private byte[] picByte;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -28,36 +35,38 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getVersion() {
-        return version;
+    public String getDescription() {
+        return description;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
+    public byte[] getPicByte() {
+        return picByte;
+    }
+
+    public void setPicByte(byte[] picByte) {
+        this.picByte = picByte;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + description + '\'' +
+                ", price='" + price + '\'' +
+                ", picByte=" + Arrays.toString(picByte) +
+                '}';
+    }
 }
