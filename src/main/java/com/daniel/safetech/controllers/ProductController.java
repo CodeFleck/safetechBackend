@@ -6,7 +6,9 @@ import com.daniel.safetech.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,39 +23,23 @@ public class ProductController {
         this.productService = productService;
     }
 
+    private byte[] bytes;
+
     @GetMapping("/")
     public List<Product> list(Model model) {
         return productService.listAllProducts();
     }
 
-    @RequestMapping("product/{id}")
-    public String showProduct(@PathVariable Integer id, Model model) {
-        productService.getProductById(id).ifPresent(product -> model.addAttribute("product", product));
-        return "productshow";
+    @PostMapping("/upload")
+    public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
+        this.bytes = file.getBytes();
     }
 
-    @RequestMapping("product/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model) {
-        productService.getProductById(id).ifPresent(product -> model.addAttribute("product", product));
-        return "productform";
-    }
-
-    @RequestMapping("product/new")
-    public String newProduct(Model model) {
-        model.addAttribute("product", new Product());
-        return "productform";
-    }
-
-    @PostMapping(value = "product")
-    public String saveProduct(Product product) {
-        productService.saveProduct(product);
-        return "redirect:/product/" + product.getId();
-    }
-
-    @DeleteMapping("product/delete/{id}")
-    public String delete(@PathVariable Integer id) {
-        productService.deleteProductById(id);
-        return "redirect:/products";
+    @PostMapping("/add")
+    public void createBook(@RequestBody Product book) throws IOException {
+        book.setPicByte(this.bytes);
+        productService.saveProduct(book);
+        this.bytes = null;
     }
 
 }
