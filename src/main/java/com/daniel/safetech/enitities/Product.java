@@ -8,7 +8,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     private String name;
 
@@ -16,14 +16,14 @@ public class Product {
 
     private String price;
 
-    @Column(name = "picByte", length = 1000)
-    private byte[] picByte;
+    @Column(name = "picture", length = 1000)
+    private byte[] picture;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,12 +51,12 @@ public class Product {
         this.price = price;
     }
 
-    public byte[] getPicByte() {
-        return picByte;
+    public byte[] getPicture() {
+        return picture;
     }
 
-    public void setPicByte(byte[] picByte) {
-        this.picByte = picByte;
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", author='" + description + '\'' +
                 ", price='" + price + '\'' +
-                ", picByte=" + Arrays.toString(picByte) +
+                ", picByte=" + Arrays.toString(picture) +
                 '}';
     }
 }

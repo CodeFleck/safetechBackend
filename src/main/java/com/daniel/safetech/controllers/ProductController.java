@@ -1,7 +1,6 @@
 package com.daniel.safetech.controllers;
 
 import com.daniel.safetech.enitities.Product;
-import com.daniel.safetech.enitities.User;
 import com.daniel.safetech.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -37,9 +36,15 @@ public class ProductController {
 
     @PostMapping("/add")
     public void createBook(@RequestBody Product book) throws IOException {
-        book.setPicByte(this.bytes);
+        book.setPicture(this.bytes);
         productService.saveProduct(book);
         this.bytes = null;
     }
 
+    @DeleteMapping(path = { "/{id}" })
+    public Product deleteProduct(@PathVariable("id") Integer id) throws Exception {
+        Product product = productService.getProductById(id).orElseThrow(() -> new Exception("Product not found - " + id));;
+        productService.deleteProduct(product);
+        return product;
+    }
 }

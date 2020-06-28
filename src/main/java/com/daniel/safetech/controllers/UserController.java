@@ -34,7 +34,7 @@ public class UserController {
     @DeleteMapping(path = { "/{id}" })
     public User deleteUser(@PathVariable("id") Integer id) throws Exception {
         User user = userService.getUserById(id).orElseThrow(() -> new Exception("User not found - " + id));
-        userService.deleteUserById(id);
+        userService.deleteUser(user);
         return user;
     }
 }
