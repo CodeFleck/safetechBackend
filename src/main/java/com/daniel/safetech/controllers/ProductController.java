@@ -41,6 +41,11 @@ public class ProductController {
         this.bytes = null;
     }
 
+    @PutMapping("/update")
+    public void updateBook(@RequestBody Product product) {
+        productService.saveProduct(product);
+    }
+
     @DeleteMapping(path = { "/{id}" })
     public Product deleteProduct(@PathVariable("id") Integer id) throws Exception {
         Product product = productService.getProductById(id).orElseThrow(() -> new Exception("Product not found - " + id));;
