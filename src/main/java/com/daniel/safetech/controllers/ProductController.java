@@ -48,7 +48,7 @@ public class ProductController {
 
     @DeleteMapping(path = { "/{id}" })
     public Product deleteProduct(@PathVariable("id") Integer id) throws Exception {
-        Product product = productService.getProductById(id).orElseThrow(() -> new Exception("Product not found - " + id));;
+        Product product = productService.getProductById(id).orElseThrow(() -> new RuntimeException("Product not found - " + id));
         productService.deleteProduct(product);
         return product;
     }

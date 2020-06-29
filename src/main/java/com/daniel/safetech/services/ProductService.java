@@ -13,8 +13,6 @@ public interface ProductService {
 
     Product saveProduct(Product product);
 
-    void deleteProductById(Integer id);
-
     void deleteProduct(Product product);
 
 }

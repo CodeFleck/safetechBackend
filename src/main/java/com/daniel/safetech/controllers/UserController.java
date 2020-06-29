@@ -1,8 +1,6 @@
 package com.daniel.safetech.controllers;
 
 import com.daniel.safetech.enitities.User;
-import com.daniel.safetech.repositories.UserRepository;
-import com.daniel.safetech.services.ProductService;
 import com.daniel.safetech.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +31,7 @@ public class UserController {
 
     @DeleteMapping(path = { "/{id}" })
     public User deleteUser(@PathVariable("id") Integer id) throws Exception {
-        User user = userService.getUserById(id).orElseThrow(() -> new Exception("User not found - " + id));
+        User user = userService.getUserById(id).orElseThrow(() -> new RuntimeException("User not found - " + id));
         userService.deleteUser(user);
         return user;
     }
